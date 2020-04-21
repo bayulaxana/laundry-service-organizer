@@ -8,6 +8,20 @@ $loader = new \Phalcon\Loader();
 $loader->registerDirs(
     [
         $config->application->controllersDir,
-        $config->application->modelsDir
+        $config->application->modelsDir,
+        $config->application->libraryDir,
     ]
-)->register();
+);
+
+$loader->registerNamespaces(
+    [
+        /**
+         * SQL Server DB
+         */
+        'Phalcon\Db\Adapter\Pdo' => APP_PATH . '/library/Phalcon/Db/Adapter/Pdo',
+        'Phalcon\Db\Dialect' => APP_PATH . '/library/Phalcon/Db/Dialect',
+        'Phalcon\Db\Result' => APP_PATH . '/library/Phalcon/Db/Result',
+    ]
+);
+
+$loader->register();

@@ -11,16 +11,12 @@ use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
 
-/**
- * Shared configuration service
- */
+// Configuration
 $di->setShared('config', function () {
     return include APP_PATH . "/config/config.php";
 });
 
-/**
- * The URL component is used to generate all kind of urls in the application
- */
+// URL
 $di->setShared('url', function () {
     $config = $this->getConfig();
 
@@ -30,9 +26,7 @@ $di->setShared('url', function () {
     return $url;
 });
 
-/**
- * Setting up the view component
- */
+// view
 $di->setShared('view', function () {
     $config = $this->getConfig();
 
@@ -43,11 +37,9 @@ $di->setShared('view', function () {
     $view->registerEngines([
         '.volt' => function ($view) {
             $config = $this->getConfig();
-
             $volt = new VoltEngine($view, $this);
-
             $volt->setOptions([
-                'path' => $config->application->cacheDir,
+                'path' => $config->application->voltCacheDir,
                 'separator' => '_'
             ]);
 
@@ -60,9 +52,7 @@ $di->setShared('view', function () {
     return $view;
 });
 
-/**
- * Database connection is created based in the parameters defined in the configuration file
- */
+// Database connection
 $di->setShared('db', function () {
     $config = $this->getConfig();
 
@@ -82,17 +72,12 @@ $di->setShared('db', function () {
     return new $class($params);
 });
 
-
-/**
- * If the configuration specify the use of metadata adapter use it or use memory otherwise
- */
+// Metadata Adapter
 $di->setShared('modelsMetadata', function () {
     return new MetaDataAdapter();
 });
 
-/**
- * Register the session flash service with the Twitter Bootstrap classes
- */
+// Flash
 $di->set('flash', function () {
     $escaper = new Escaper();
     $flash = new Flash($escaper);
@@ -107,9 +92,7 @@ $di->set('flash', function () {
     return $flash;
 });
 
-/**
- * Start the session the first time some component request the session service
- */
+// Session
 $di->setShared('session', function () {
     $session = new SessionManager();
     $files = new SessionAdapter([

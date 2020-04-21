@@ -1,2 +1,6 @@
 vendor/
-
+.vscode/
+.phalcon/
+cache/volt/
+dummy.html
+composer.lock

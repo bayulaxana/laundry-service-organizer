@@ -10,15 +10,16 @@ define('localhost', '127.0.0.1');
 
 return new \Phalcon\Config([
     'database' => [
-        'adapter'     => 'Mysql',
-        'host'        => localhost,
-        'username'    => 'root',
-        'password'    => '',
-        'dbname'      => 'laravel_test',
+        'adapter'     => 'Sqlsrv',
+        'host'        => 'localhost',
+        'username'    => 'bayulaxana',
+        'password'    => 'Bayulaxana05',
+        'dbname'      => 'lso_test',
         'charset'     => 'utf8',
     ],
     'application' => [
         'appDir'         => APP_PATH . '/',
+        'formDir'        => APP_PATH . '/forms/',
         'voltCacheDir'   => BASE_PATH . '/cache/volt/',
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',

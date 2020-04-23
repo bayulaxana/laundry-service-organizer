@@ -1,13 +1,18 @@
 <?php
 declare(strict_types=1);
 
+use LaundryApp\Providers\SecurityHandler;
+use Phalcon\Db\RawValue;
 use Phalcon\Escaper;
+use Phalcon\Events\Manager;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Stream as SessionAdapter;
+use Phalcon\Session\Bag;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
 
@@ -102,4 +107,20 @@ $di->setShared('session', function () {
     $session->start();
 
     return $session;
+});
+
+// SessionBag
+$di->setShared('sessionBag', function() {
+    return new Bag('bag');
+});
+
+// Dispatcher
+$di->setShared('dispatcher', function() {
+    $eventsManager = new Manager();
+    $eventsManager->attach('dispatch:beforeExecuteRoute', new SecurityHandler);
+
+    $dispatcher = new Dispatcher();
+    $dispatcher->setEventsManager($eventsManager);
+
+    return $dispatcher;
 });

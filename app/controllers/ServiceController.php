@@ -1,19 +1,20 @@
 <?php
 declare(strict_types=1);
 
+use Phalcon\Db\Enum;
 use Phalcon\Mvc\Dispatcher;
 
-class DashboardController extends ControllerBase
+class ServiceController extends ControllerBase
 {
     public function initialize()
     {
         parent::initialize();
         $titleArray = [
-            'index' => 'Halaman Awal',
-            'activity' => 'Aktivitas',
-            'latest' => 'Riwayat Terbaru',
+            'index' => 'Layanan Kami',
+            'add' => 'Tambah'
         ];
         $actionName = $this->dispatcher->getActionName();
+        $controllerName = $this->dispatcher->getControllerName();
         
         $this->tag->setTitle($titleArray[$actionName]);
         $this->view->setTemplateAfter('main-layout');
@@ -21,16 +22,11 @@ class DashboardController extends ControllerBase
     
     public function indexAction()
     {
-        $this->response->redirect('/dashboard/activity');
-    }
-
-    public function activityAction()
-    {
         
     }
 
-    public function latestAction()
+    public function addAction()
     {
-
+        
     }
 }

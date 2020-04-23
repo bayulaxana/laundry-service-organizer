@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Phalcon\Db\Adapter\AdapterInterface;
 use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\Dispatcher;
 
 class ControllerBase extends Controller
 {

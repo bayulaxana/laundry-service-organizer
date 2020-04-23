@@ -103,7 +103,7 @@
       <div class="ui segment attached">
         <div class="ui fluid vertical steps">
           <div class="step">
-            <i class="truck icon"></i>
+            <i class="dolly icon"></i>
             <div class="content">
               <div class="title">
                 <h3>Penjemputan</h3>
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div class="step">
-            <i class="dollar icon"></i>
+            <i class="shopping basket icon"></i>
             <div class="content">
               <div class="title">
                 <h3>Pesan Layanan</h3>
@@ -130,7 +130,7 @@
             </div>
           </div>
           <div class="step">
-            <i class="truck icon"></i>
+            <i class="hourglass icon"></i>
             <div class="content">
               <div class="title">
                 <h3>Pengerjaan</h3>
@@ -150,13 +150,15 @@
         </div>
       </div>
       <div class="segment ui attached right aligned">
-        {{ link_to("/login", 
-            'Masuk untuk memulai <i class="right arrow icon"></i>',
-            "class":"ui right labeled icon button green large")
-        }}
+        {% set loggedin = session.has('auth') %}
+        {% if loggedin %}
+          {{ link_to("/order", 'Pesan sekarang <i class="right arrow icon"></i>', "class":"ui right labeled icon button green large") }}
+        {% else %}
+          {{ link_to("/login", 'Masuk untuk memulai <i class="right arrow icon"></i>', "class":"ui right labeled icon button green large") }}
+        {% endif %}
       </div>
     </div>
-
+    {% if session.has('auth') == false %}
     <div class="six wide column">
       <div class="ui container">
 
@@ -166,7 +168,6 @@
           </div>
           <p>Isi form berikut untuk mendaftarkan akun baru</p>
         </div>
-
         <form class="ui form attached fluid segment">
           <div class="two fields">
             <div class="field">
@@ -215,4 +216,5 @@
         </div>
       </div>
     </div>
+    {% endif %}
   </div>

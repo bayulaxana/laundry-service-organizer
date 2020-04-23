@@ -1,3 +1,16 @@
+{% set menuOptions = [
+    'activity': [
+        'icon': 'tasks',
+        'name': 'Aktivitas Pesanan',
+        'uri': '/dashboard/activity'
+    ],
+    'latest': [
+        'icon': 'clipboard check',
+        'name': 'Riwayat Pesanan Terkini',
+        'uri': '/dashboard/latest'
+    ]
+] %}
+
 <!-- SECTION TITLE -->
 <div class="ui container">
     <div class="ui divider"></div>
@@ -23,12 +36,12 @@
 
 <!-- Attached Menu -->
 <div class="ui top attached compact menu inside pointing inverted">
-    <a class="active item">
-        Aktivitas Pesanan
-    </a>
-    <a class="item">
-        Riwayat Pesanan
-    </a>
+    {% for action, menu in menuOptions %}
+        <a href="{{ menu['uri'] }}" class="item {% if action == dispatcher.getActionName()|lower %}active{% endif %}">
+            <i class="icon {{ menu['icon'] }}"></i>
+            {{ menu['name'] }}
+        </a>
+    {% endfor %}
     <div class="right menu">
         <!-- NO ITEM -->
     </div>

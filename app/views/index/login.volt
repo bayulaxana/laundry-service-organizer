@@ -12,21 +12,34 @@
             <h2>Masuk ke akun anda</h2>
             Masukkan username dan password akun anda
         </div>
-        <form class="ui form attached fluid segment">
+        <!-- FORM -->
+        <form method="post" class="ui form attached fluid segment error success">
             <div class="field">
-                <label>Username</label>
-                <input placeholder="Username" type="text">
+                {{ form.label('username') }}
+                {{ form.render('username', ['placeholder': 'Username']) }}
             </div>
+            {% if messageList['username'] is defined %}
+                <div class="ui inverted message tiny red">
+                    <div class="header">Terjadi kesalahan</div>
+                    <p>{{ messageList['username'] }}</p>
+                </div>
+            {% endif %}
             <div class="field">
-                <label>Password</label>
-                <input placeholder="Password" type="password">
+                {{ form.label('password') }}
+                {{ form.render('password', ['placeholder': 'Password']) }}
             </div>
-            <div class="ui blue submit button">Masuk</div>
-            <div class="ui submit button">Lupa password</div>
+            {% if messageList['password'] is defined %}
+                <div class="ui message tiny error">
+                    <div class="header">Terjadi kesalahan</div>
+                    <p>{{ messageList['password'] }}</p>
+                </div>
+            {% endif %}
+            <input type="submit" value="Masuk" class="ui blue submit button"/>
         </form>
+        <!-- FORM // -->
         <div class="ui bottom attached warning message">
             <i class="icon help"></i>
-            Tidak punya akun? <a href="#">Daftar disini</a>
+            Tidak punya akun? {{ link_to("/register", "Daftar disini", "class": "") }}
         </div>
 
         <div class="ui fluid card">

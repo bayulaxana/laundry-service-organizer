@@ -60,7 +60,7 @@ class SecurityHandler extends Injectable
         $privateResources = [
             'index' => ['logout'],
             'dashboard' => ['index', 'activity', 'latest'],
-            'order' => ['index', 'detail'],
+            'order' => ['index', 'detail', 'new'],
         ];
         foreach ($privateResources as $resource => $actions) {
             $acl->addComponent(new Component($resource), $actions);

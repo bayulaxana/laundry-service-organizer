@@ -14,6 +14,7 @@
         </div>
         <!-- FORM -->
         <form method="post" class="ui form attached fluid segment error success">
+            {{ flash.output() }}
             <div class="field">
                 {{ form.label('username') }}
                 {{ form.render('username', ['placeholder': 'Username']) }}

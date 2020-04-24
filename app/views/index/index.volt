@@ -152,7 +152,7 @@
       <div class="segment ui attached right aligned">
         {% set loggedin = session.has('auth') %}
         {% if loggedin %}
-          {{ link_to("/order", 'Pesan sekarang <i class="right arrow icon"></i>', "class":"ui right labeled icon button green large") }}
+          {{ link_to("/order/new", 'Pesan sekarang <i class="right arrow icon"></i>', "class":"ui right labeled icon button green large") }}
         {% else %}
           {{ link_to("/login", 'Masuk untuk memulai <i class="right arrow icon"></i>', "class":"ui right labeled icon button green large") }}
         {% endif %}
@@ -168,46 +168,44 @@
           </div>
           <p>Isi form berikut untuk mendaftarkan akun baru</p>
         </div>
-        <form class="ui form attached fluid segment">
-          <div class="two fields">
-            <div class="field">
-              <label>First Name</label>
-              <input placeholder="First Name" type="text">
-            </div>
-            <div class="field">
-              <label>Last Name</label>
-              <input placeholder="Last Name" type="text">
-            </div>
+        <form action="/register" method="post" class="ui form attached fluid segment">
+          <div class="field">
+            {{ form.label('name') }}
+            {{ form.render('name', ['placeholder': 'Nama']) }}
           </div>
           <div class="field">
-            <label>Username</label>
-            <input placeholder="Username" type="text">
+            {{ form.label('username') }}
+            {{ form.render('username', ['placeholder': 'Username']) }}
           </div>
           <div class="field">
-            <label>Password</label>
-            <input placeholder="Password" type="password">
+            {{ form.label('password') }}
+            {{ form.render('password', ['placeholder': 'Password']) }}
           </div>
           <div class="field">
-            <label>Email</label>
-            <input placeholder="Email" type="text">
+            {{ form.label('email') }}
+            {{ form.render('email', ['placeholder': 'Email']) }}
           </div>
           <div class="field">
-            <label>Telepon</label>
-            <input placeholder="Telepon" type="text">
+            {{ form.label('phone') }}
+            {{ form.render('phone', ['placeholder': 'Nomor Telepon']) }}
+          </div>
+          <div class="field">
+            {{ form.label('gender') }}
+            {{ form.render('gender') }}
           </div>
           <div class="field">
             <div class="field">
-              <label>Alamat</label>
-              <textarea rows="2" placeholder="Alamat"></textarea>
+              {{ form.label('address') }}
+              {{ form.render('address', ['rows': '2', 'placeholder': 'Alamat']) }}
             </div>
           </div>
           <div class="inline field">
             <div class="ui checkbox">
-              <input type="checkbox" id="terms">
+              <input type="checkbox" id="terms" name="terms">
               <label for="terms">Saya setuju dengan kebijakan dan ketentuan yang berlaku</label>
             </div>
           </div>
-          <div class="ui blue submit button">Submit</div>
+          <button type="submit" class="ui blue submit button">Submit</button>
         </form>
 
         <div class="ui bottom attached warning message">

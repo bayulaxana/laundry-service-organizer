@@ -1,6 +1,6 @@
 <!-- NAVIGATION BAR -->
 <div class="ui tablet computer only padded grid">
-    <div class="ui blue compact top fixed borderless fluid small menu pointing">
+    <div class="ui inverted compact top fixed borderless fluid menu pointing" style="font-family: 'SF Pro Text', 'Roboto', 'Segoe UI', sans-serif; z-index: 5;">
         <div class="ui container">
             <a class="header item">LSO</a>
             {% if session.has('auth') %}
@@ -23,6 +23,7 @@
             <div class="right menu">
                 {% if session.has('auth') %}
 				{% set mysession = session.get('auth') %}
+                {{ link_to('/myitem', 'Item', 'class': 'item') }}
 				<div class="ui dropdown item">
 					<i class="icon user circle"></i>
 					{{ mysession['username'] }} <i class="dropdown icon"></i>

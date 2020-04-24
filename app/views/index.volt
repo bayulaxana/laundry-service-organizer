@@ -34,8 +34,18 @@
             $(".ui.toggle.button").click(function () {
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);
             });
-
+            $('.ui.progress').progress();
             $(".ui.dropdown").dropdown();
+            $('select.ui.dropdown').dropdown();
+            $('.ui.message .close').on('click', function() {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+
+            $('#service-select').on('change', function () {
+                $('#next-one').removeClass('disabled');
+            });
         });
     </script>
 

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use LaundryApp\Forms\LoginForm;
+use LaundryApp\Forms\RegisterForm;
 
 class IndexController extends ControllerBase
 {
@@ -21,8 +22,14 @@ class IndexController extends ControllerBase
         $this->view->setTemplateAfter('main-layout');
     }
     
-    public function indexAction() {
+    public function indexAction()
+    {
         $this->loadLandingPageAssets();
+        $form = new RegisterForm();
+
+        
+        
+        $this->view->form = $form;
     }
 
     public function loginAction()
@@ -34,15 +41,24 @@ class IndexController extends ControllerBase
         }
         
         if ($this->request->isPost()) {
-
+            // Checking if the form is valid
             if ($form->isValid($this->request->getPost()) == false) {
                 $messages = $form->getMessages();
                 $msgList = [];
                 
                 foreach ($messages as $msg) {
-                    $msgList[$msg->getField()] = $msg->getMessage();
+                    array_push($msgList, $msg->getMessage());
+                    $field = $form->get($msg->getField());
+                    $field->setAttribute('class', 'input-error');
+                    
                 }
-                $this->view->setVar('messageList', $msgList);
+                
+                $this->flash->error(
+                    $this->getFormattedFlashOutput('Terjadi Kesalahan', $msgList)
+                );
+
+                $this->view->form = $form;
+                return;
             }
 
             $username = $this->request->get('username');
@@ -58,7 +74,6 @@ class IndexController extends ControllerBase
 
             if ($user) {
                 $this->setUserSession($user);
-
                 $this->dispatcher->forward([
                     'controller' => 'dashboard',
                     'action' => 'index',

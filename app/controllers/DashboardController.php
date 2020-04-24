@@ -26,7 +26,40 @@ class DashboardController extends ControllerBase
 
     public function activityAction()
     {
-        
+        // Find order by the user id
+        $orders = Orders::find(
+            [
+                'user_id = :user_id:',
+                'bind' => [
+                    'user_id' => $this->session->auth['id'],
+                ]
+            ]
+        )->toArray();
+
+        // Calculation
+        $orderCount = count($orders);
+        $activeOrder = 0;
+        $finishedOrder = 0;
+        $waitingOrder = 0;
+        foreach ($orders as $order) {
+            
+            if ($order['order_status'] == 'Sedang Dikerjakan') {
+                $activeOrder++;
+            }
+            else if ($order['order_status'] == 'Sudah Selesai') {
+                $finishedOrder++;
+            }
+            else if ($order['order_status'] == 'Menunggu Barang') {
+                $waitingOrder++;
+            }
+        }
+        // Send it to view
+        $this->view->setVar('orderDetail', [
+            'orderCount' => $orderCount,
+            'activeOrder' => $activeOrder,
+            'finishedOrder' => $finishedOrder,
+            'waitingOrder' => $waitingOrder,
+        ]);
     }
 
     public function latestAction()

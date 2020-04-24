@@ -38,12 +38,34 @@ class RegisterController extends ControllerBase
         $form = new RegisterForm();
         
         if ($this->request->isPost()) {
+            // Checking if the form is valid
+            if ($form->isValid($this->request->getPost()) == false) {
+                $messages = $form->getMessages();
+                $msgList = [];
+                
+                foreach ($messages as $msg) {
+                    array_push($msgList, $msg->getMessage());
+                    $field = $form->get($msg->getField());
+                    $field->setAttribute('class', 'input-error');
+                    
+                }
+                
+                $this->flash->error(
+                    $this->getFormattedFlashOutput('Terjadi Kesalahan', $msgList)
+                );
+                
+                $this->view->form = $form;
+                return;
+            }
+            
             $user = new Users();
             $data = $this->request->getPost();
             $datetime = date_create('now')->format('Y-m-d H:i:s');
 
             if ($this->isUserExist($data)) {
-                $this->flash->error('Akun anda telah terdaftar');
+                $this->flash->error(
+                    $this->getFormattedFlashOutput('Oops', ['Akun anda telah terdaftar'])
+                );
             }
             else {
                 $user->username     = $data['username'];
@@ -58,6 +80,9 @@ class RegisterController extends ControllerBase
     
                 $user->save();
                 $form->clear();
+                $this->flash->success(
+                    $this->getFormattedFlashOutput('Berhasil', ['Akun anda telah terdaftar. Silahkan masuk.'])
+                );
             }
         }
         

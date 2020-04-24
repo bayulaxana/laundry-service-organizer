@@ -3,4 +3,10 @@ body {
     background-image: url('810_2.jpg');
     background-size: contain;
     background-repeat: repeat;
-  }
+    font-family: 'SF Pro Text', 'Roboto', 'Segoe UI', sans-serif;
+}
+
+.field .input-error {
+    background-color: #ffe8e6;
+    border: #db2828;
+}

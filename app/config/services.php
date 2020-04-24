@@ -47,6 +47,8 @@ $di->setShared('view', function () {
                 'path' => $config->application->voltCacheDir,
                 'separator' => '_'
             ]);
+            $voltCompiler = $volt->getCompiler();
+            $voltCompiler->addFunction('strtotime', 'strtotime');
 
             return $volt;
         },
@@ -87,11 +89,12 @@ $di->set('flash', function () {
     $escaper = new Escaper();
     $flash = new Flash($escaper);
     $flash->setImplicitFlush(false);
+    $flash->setAutoescape(false);
     $flash->setCssClasses([
-        'error'   => 'alert alert-danger',
-        'success' => 'alert alert-success',
-        'notice'  => 'alert alert-info',
-        'warning' => 'alert alert-warning'
+        'error'   => 'ui message inverted red small',
+        'success' => 'ui message inverted green small',
+        'notice'  => 'ui message inverted blue small',
+        'warning' => 'ui message inverted yellow small',
     ]);
 
     return $flash;

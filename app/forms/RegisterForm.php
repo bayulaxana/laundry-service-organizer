@@ -73,7 +73,7 @@ class RegisterForm extends Form
         $gender = new Select(
             'gender',
             [
-                0 => 'Pilih jenis kelamin',
+                '' => 'Pilih jenis kelamin',
                 1 => 'Laki laki',
                 2 => 'Perempuan',
             ],  
@@ -82,6 +82,7 @@ class RegisterForm extends Form
         $gender->setLabel('Jenis Kelamin');
         $gender->setDefault(0);
         $gender->setAttribute('id', 'register-' . $gender->getName());
+        $gender->setAttribute('class', 'ui select dropdown');
 
         $passwod = new Password('password');
         

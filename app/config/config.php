@@ -29,5 +29,6 @@ return new \Phalcon\Config([
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/',
+        'apiDir'         => APP_PATH . '/controllers/API/',
     ]
 ]);

@@ -11,6 +11,7 @@ $loader->registerDirs(
         $config->application->modelsDir,
         $config->application->libraryDir,
         $config->application->formDir,
+        $config->application->apiDir,
     ]
 );
 

@@ -31,6 +31,7 @@
                     </div>
                 </div>
                 <div class="column">
+                    {{ flashSession.output() }}
                     <div class="ui pagination menu small blue">
                         {{ link_to( '/order?page=' ~ page.previous, "Sebelum", "class": "item" ) }}
                         {{ link_to( '/order?page=' ~ page.next, "Selanjutnya", "class": "item" ) }}

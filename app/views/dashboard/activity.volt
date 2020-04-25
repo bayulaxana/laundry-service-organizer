@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                {{ link_to('/order', 'Lihat Daftar <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
+                {{ link_to('/order', 'Lihat Riwayat Pesanan <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
             </div>
             <div class="card blue">
                 <div class="content">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                {{ link_to('/order', 'Lihat Daftar <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
+                {{ link_to('/order', 'Lihat Riwayat Pesanan <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
             </div>
             <div class="card blue">
                 <div class="content">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                {{ link_to('/order', 'Lihat Daftar <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
+                {{ link_to('/order', 'Lihat Riwayat Pesanan <i class="icon add"></i>', 'class': 'ui bottom labeled icon attached button') }}
             </div>
         </div>
     </div>

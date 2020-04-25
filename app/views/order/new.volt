@@ -2,7 +2,7 @@
     {{ partial('layouts/partial/order-partial') }}
 </div>
 
-<div action="" class="ui grid container">
+<div action="" class="ui grid container stackable">
     <div class="ten wide column">
         <div class="ui message top attached">
             
@@ -88,7 +88,7 @@
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
-                                    <td id="">Rp4.500,00 per Kg</td>
+                                    <td id=""><div class="ui active inline small loader"></div></td>
                                 </tr>
                                 <tr class="disabled">
                                     <td>Berat/Jumlah</td>

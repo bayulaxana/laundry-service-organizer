@@ -2,6 +2,7 @@
 
 namespace LaundryApp\Providers;
 
+use ControllerBase;
 use Phalcon\Acl\Adapter\Memory;
 use Phalcon\Acl\Component;
 use Phalcon\Acl\Enum as AclEnum;
@@ -61,6 +62,9 @@ class SecurityHandler extends Injectable
             'index' => ['logout'],
             'dashboard' => ['index', 'activity', 'latest'],
             'order' => ['index', 'detail', 'new'],
+            'myitem' => ['index', 'new', 'edit', 'update', 'delete'],
+            'account' => ['index', 'edit'],
+            'api' => ['index', 'getitem'],
         ];
         foreach ($privateResources as $resource => $actions) {
             $acl->addComponent(new Component($resource), $actions);

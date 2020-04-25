@@ -8,6 +8,7 @@ class Item extends Model
     public $user_id;
     public $item_details;
     public $item_type;
+    public $item_image;
     
     public function initialize() {
         $this->setReadConnectionService('db');

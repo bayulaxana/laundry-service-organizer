@@ -37,12 +37,14 @@ class CreateOrderForm extends Form
         // Item
         $item = new Select(
             'item',
-            Item::find([
-                'user_id = :user_id:',
-                'bind' => [
-                    'user_id' => $this->session->auth['id'],
+            Item::find(
+                [
+                    'user_id = :user_id:',
+                    'bind' => [
+                        'user_id' => $this->session->auth['id'],
+                    ]
                 ]
-            ]),
+            ),
             [
                 'emptyText' => 'Pilih item',
                 'emptyValue' => '',

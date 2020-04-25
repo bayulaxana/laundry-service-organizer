@@ -29,7 +29,7 @@ class DashboardController extends ControllerBase
         // Find order by the user id
         $orders = Orders::find(
             [
-                'user_id = :user_id:',
+                'conditions' => 'user_id = :user_id:',
                 'bind' => [
                     'user_id' => $this->session->auth['id'],
                 ]
@@ -37,12 +37,11 @@ class DashboardController extends ControllerBase
         )->toArray();
 
         // Calculation
-        $orderCount = count($orders);
-        $activeOrder = 0;
-        $finishedOrder = 0;
-        $waitingOrder = 0;
+        $orderCount     = count($orders);
+        $activeOrder    = 0;
+        $finishedOrder  = 0;
+        $waitingOrder   = 0;
         foreach ($orders as $order) {
-            
             if ($order['order_status'] == 'Sedang Dikerjakan') {
                 $activeOrder++;
             }
@@ -53,6 +52,7 @@ class DashboardController extends ControllerBase
                 $waitingOrder++;
             }
         }
+        
         // Send it to view
         $this->view->setVar('orderDetail', [
             'orderCount' => $orderCount,

@@ -80,6 +80,9 @@ class OrderController extends ControllerBase
             }
 
             $this->response->redirect('/order');
+            $this->flashSession->success(
+                ControllerBase::getFormattedFlashOutputStatic('Berhasil', ['Pesanan anda berhasil disimpan'])
+            );
             return;
         }
         

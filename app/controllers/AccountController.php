@@ -4,14 +4,14 @@ declare(strict_types=1);
 use Phalcon\Db\Enum;
 use Phalcon\Mvc\Dispatcher;
 
-class ServiceController extends ControllerBase
+class AccountController extends ControllerBase
 {
     public function initialize()
     {
         parent::initialize();
         $titleArray = [
-            'index' => 'Layanan Kami',
-            'add' => 'Tambah',
+            'index' => 'Profil',
+            'edit' => 'Edit Profil',
         ];
         $actionName = $this->dispatcher->getActionName();
         $controllerName = $this->dispatcher->getControllerName();
@@ -25,7 +25,7 @@ class ServiceController extends ControllerBase
         
     }
 
-    public function addAction()
+    public function editAction()
     {
         
     }

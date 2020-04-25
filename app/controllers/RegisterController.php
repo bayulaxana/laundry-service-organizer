@@ -22,7 +22,7 @@ class RegisterController extends ControllerBase
     public function isUserExist($requestData)
     {
         $uniqueness = Users::findFirst([
-            'username = :username: OR email = :email:',
+            'conditions' => 'username = :username: OR email = :email:',
             'bind' => [
                 'username' => $requestData['username'],
                 'email' => $requestData['email'],
@@ -45,9 +45,6 @@ class RegisterController extends ControllerBase
                 
                 foreach ($messages as $msg) {
                     array_push($msgList, $msg->getMessage());
-                    $field = $form->get($msg->getField());
-                    $field->setAttribute('class', 'input-error');
-                    
                 }
                 
                 $this->flash->error(
@@ -64,7 +61,7 @@ class RegisterController extends ControllerBase
 
             if ($this->isUserExist($data)) {
                 $this->flash->error(
-                    $this->getFormattedFlashOutput('Oops', ['Akun anda telah terdaftar'])
+                    $this->getFormattedFlashOutput('Registrasi Gagal', ['Akun anda telah terdaftar'])
                 );
             }
             else {
@@ -75,8 +72,8 @@ class RegisterController extends ControllerBase
                 $user->phone        = $data['phone'];
                 $user->gender       = (int) $data['gender'] == 1 ? 'L' : 'P';
                 $user->address      = $data['address'];
+                $user->role         = 1;
                 $user->register_date = $datetime;
-                $user->role = 1;
     
                 $user->save();
                 $form->clear();

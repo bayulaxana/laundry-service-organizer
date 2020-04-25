@@ -27,8 +27,6 @@ class IndexController extends ControllerBase
         $this->loadLandingPageAssets();
         $form = new RegisterForm();
 
-        
-        
         $this->view->form = $form;
     }
 

@@ -52,7 +52,7 @@ class IndexController extends ControllerBase
                 }
                 
                 $this->flash->error(
-                    $this->getFormattedFlashOutput('Terjadi Kesalahan', $msgList)
+                    $this->getFormattedFlashOutput('Login Gagal', $msgList)
                 );
 
                 $this->view->form = $form;
@@ -63,14 +63,14 @@ class IndexController extends ControllerBase
             $password = $this->request->get('password');
 
             $user = Users::findFirst([
-                'username = :username: AND password = :password:',
+                'username = :username:',
                 'bind' => [
                     'username' => $username,
-                    'password' => $password,
                 ]
             ]);
 
-            if ($user) {
+            if ($user && $this->security->checkHash($password, $user->password)) {
+
                 $this->setUserSession($user);
                 $this->dispatcher->forward([
                     'controller' => 'dashboard',
@@ -78,6 +78,11 @@ class IndexController extends ControllerBase
                 ]);
 
                 return;
+            }
+            else {
+                $this->flash->error(
+                    $this->getFormattedFlashOutput('Login Gagal', ['Username atau Password salah'])
+                );
             }
         }
 

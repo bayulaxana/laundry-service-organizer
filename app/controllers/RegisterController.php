@@ -48,7 +48,7 @@ class RegisterController extends ControllerBase
                 }
                 
                 $this->flash->error(
-                    $this->getFormattedFlashOutput('Terjadi Kesalahan', $msgList)
+                    $this->getFormattedFlashOutput('Register Gagal', $msgList)
                 );
                 
                 $this->view->form = $form;
@@ -67,13 +67,14 @@ class RegisterController extends ControllerBase
             else {
                 $user->username     = $data['username'];
                 $user->name         = $data['name'];
-                $user->password     = $data['password'];
+                $user->password     = $this->security->hash($data['password']);
                 $user->email        = $data['email'];
                 $user->phone        = $data['phone'];
                 $user->gender       = (int) $data['gender'] == 1 ? 'L' : 'P';
                 $user->address      = $data['address'];
                 $user->role         = 1;
                 $user->register_date = $datetime;
+                $user->profile_img  = 'img/default.png';
     
                 $user->save();
                 $form->clear();

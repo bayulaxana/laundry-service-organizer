@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use LaundryApp\Forms\CommentForm;
 use LaundryApp\Forms\CreateOrderForm;
 use Phalcon\Db\Column;
 use Phalcon\Db\Enum;
@@ -33,13 +34,15 @@ class OrderController extends ControllerBase
                 FROM Orders AS ord
                 INNER JOIN Service AS srv
                 ON ord.service_id = srv.service_id
-                WHERE ord.user_id = " . $this->session->auth['id'] . " ORDER BY ord.order_date";
+                WHERE ord.user_id = " . $this->session->auth['id'] . " ORDER BY ord.order_date DESC";
+    
         
         $data = $this->dbConnection->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+        
         $paginator = new ArrayPaginator(
             [
                 'data' => $data,
-                'limit' => 5,
+                'limit' => 8,
                 'page' => $currPage,
             ]
         );
@@ -89,11 +92,63 @@ class OrderController extends ControllerBase
         $this->view->form = $form;
     }
 
-    public function detailAction()
+    public function detailAction($orderId = null)
     {
-        $this->view->disable();
-        $x = strtotime('2020-04-24');
-        echo var_dump($x);
+        if (is_numeric($orderId) == false || $orderId == null) {
+            $this->response->redirect('/order');
+            $this->flashSession->error(
+                parent::getFormattedFlashOutputStatic('Terjadi Kesalahan', ['Tidak dapat mengakses detail pesanan'])
+            );
+        }
+        else {
+            $commentForm = new CommentForm();
+            
+            // Fetch the order detail
+            $sql = "SELECT ord.*, srv.service_code, srv.service_name, srv.service_price, srv.service_unit_scheme
+                    FROM Orders AS ord
+                    INNER JOIN Service AS srv
+                    ON ord.service_id = srv.service_id
+                    WHERE ord.user_id = " . $this->session->auth['id'] . " AND ord.order_id = " . $orderId;
+            $order = $this->dbConnection->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+            // Fetch the delivery status
+            $sql = "SELECT * FROM Pickup_Delivery WHERE order_id = " . $orderId;
+            $pickupDelivery = $this->dbConnection->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+            if (!$order) {
+                $this->response->redirect('/order');
+                $this->flashSession->error(
+                    parent::getFormattedFlashOutputStatic('Terjadi Kesalahan', ['Tidak dapat mengakses detail pesanan'])
+                );
+            }
+
+            if (!$pickupDelivery) {
+                $this->view->setVar('pickupDelivery', null);
+            }
+            else {
+                $this->view->setVar('pickupDelivery', $pickupDelivery[0]);
+            }
+            
+            // Fetch all comments
+            $comments = Comment::find(
+                [
+                    'conditions' => 'order_id = :order_id:',
+                    'bind' => ['order_id' => $orderId],
+                ]
+            )->toArray();
+            
+            if (!$comments) {
+                $this->flash->error(
+                    parent::getFormattedFlashOutputStatic('Terjadi Kesalahan', ['Tidak dapat mengakses komentar'])
+                );
+            }
+
+            // Sends everything to view
+            $this->assets->addJs('js/order/detail.js');
+            $this->view->setVar('order', $order[0]);
+            $this->view->setVar('comments', $comments);
+            $this->view->commentForm = $commentForm;
+        }        
     }
 }
 

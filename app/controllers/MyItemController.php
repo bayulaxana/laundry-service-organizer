@@ -62,7 +62,6 @@ class MyItemController extends ControllerBase
         if ($this->request->isPost()) {
             
             if ($form->isValid($this->request->getPost()) == false) {
-                $this->response->redirect('/myitem');
                 
                 $messages = $form->getMessages();
                 $msgList = [];
@@ -74,10 +73,11 @@ class MyItemController extends ControllerBase
                     
                 }
 
-                $this->flashSession->error(
+                $this->flash->error(
                     ControllerBase::getFormattedFlashOutputStatic('Terjadi Kesalahan', $msgList),
                 );
 
+                $this->view->form = $form;
                 return;
             }
 
@@ -98,6 +98,7 @@ class MyItemController extends ControllerBase
                         "img/item/item-id-" . 
                         $item->item_id . "-" .
                         date_create('now')->format('Y-m-d His') . "." . $file->getExtension();
+                    
                     $savePath = BASE_PATH . '/public/' . $fileNametoDB;
                     $file->moveTo($savePath);
                     
@@ -127,7 +128,7 @@ class MyItemController extends ControllerBase
         if ($this->request->isPost()) {
             
             if ($form->isValid($this->request->getPost()) == false) {
-                $this->response->redirect('/myitem');
+                $this->response->redirect('/myitem/new');
                 
                 $messages = $form->getMessages();
                 $msgList = [];
@@ -145,13 +146,20 @@ class MyItemController extends ControllerBase
 
                 return;
             }
+            
             $data = $this->request->getPost();
+            $item_image = $this->dbConnection->fetchOne(
+                "SELECT item_image FROM Item WHERE item_id = " . $data['item_id'],
+                \Phalcon\Db\Enum::FETCH_ASSOC
+            );
+
             $item = new Item();
             
             $item->item_id      = $data['item_id'];
             $item->user_id      = $this->session->auth['id'];
             $item->item_details = $data['item_details'];
             $item->item_type    = $data['item_type'];
+            $item->item_image   = $item_image;
 
             $item->update();
             $form->clear();
@@ -178,10 +186,19 @@ class MyItemController extends ControllerBase
             );
 
             if ($item) {
-                $item->delete();   
-                $this->flashSession->success(
-                    ControllerBase::getFormattedFlashOutputStatic('Berhasil', ['Item berhasil dihapus'])
-                );             
+                $unlinkStatus = unlink(BASE_PATH . '/public/' . $item->item_image);
+                
+                if ($unlinkStatus == true) {
+                    $item->delete();   
+                    $this->flashSession->success(
+                        ControllerBase::getFormattedFlashOutputStatic('Berhasil', ['Item berhasil dihapus'])
+                    ); 
+                }
+                else {
+                    $this->flashSession->error(
+                        ControllerBase::getFormattedFlashOutputStatic('Gagal', ['Terjadi Kesalahan'])
+                    );
+                }
             }
             else {
                 $this->flashSession->error(

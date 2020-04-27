@@ -59,7 +59,7 @@
                                 {% if item['order_total'] == null %}
                                     <td class="disabled">Belum Tersedia</td>
                                 {% else %}
-                                    <td>{{ item['order_total'] }}</td>
+                                    <td>Rp{{ number_format(item['order_total'],0,'.','.') }}</td>
                                 {% endif %}
 
                                 <td>{{ date('D, d M Y', strtotime(item['order_date'])) }}</td>

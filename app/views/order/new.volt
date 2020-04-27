@@ -88,7 +88,9 @@
                                 </tr>
                                 <tr>
                                     <td>Biaya</td>
-                                    <td id=""><div class="ui active inline small loader"></div></td>
+                                    <td id="cost-row">
+                                        <div class="ui active inline small loader" id="cost-loader"></div>
+                                    </td>
                                 </tr>
                                 <tr class="disabled">
                                     <td>Berat/Jumlah</td>

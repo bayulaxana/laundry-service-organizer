@@ -23,7 +23,11 @@
             </div>
         </div>
 
-        <div class="ui center aligned inverted blue segment">
+        <div class="ui image fluid">
+            {{ image('img/activity-bg.jpg') }}
+        </div>
+
+        <div class="ui center aligned inverted green segment">
             <div class="ui large inverted statistic">
                 <div class="value">
                     {{ orderDetail['orderCount'] }}

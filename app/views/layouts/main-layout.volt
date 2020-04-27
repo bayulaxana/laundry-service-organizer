@@ -5,25 +5,25 @@
             <a class="header item">LSO</a>
             {% if session.has('auth') %}
                 <div class="ui dropdown item">
-                Dashboard <i class="dropdown icon"></i>
+                <i class="chart line icon"></i> Dashboard <i class="dropdown icon"></i>
                 <div class="menu">
                     {{ link_to("/dashboard/activity", "Aktivitas Pesanan", "class": "item") }}
                     {{ link_to("/dashboard/latest", "Riwayat Pesanan Terkini", "class": "item") }}
                 </div>
                 </div>
-                {{ link_to("/order", "<i class='icon home'></i>Pesanan", "class": "item") }}
+                {{ link_to("/order", "<i class='icon shopping bag'></i>Pesanan", "class": "item") }}
             {% else %}
                 {{ link_to("/", "<i class='icon home'></i>Beranda", "class": "item") }}
             {% endif %}
-            <a href="/service" class="item">
+            <!-- <a href="/service" class="item">
                 <i class="clipboard list icon"></i>
                 Layanan Kami
-            </a>
+            </a> -->
             
             <div class="right menu">
                 {% if session.has('auth') %}
 				{% set mysession = session.get('auth') %}
-                {{ link_to('/myitem', 'Item', 'class': 'item') }}
+                {{ link_to('/myitem', '<i class="icon list ul"></i>Item', 'class': 'item') }}
 				<div class="ui dropdown item">
 					<i class="icon user circle"></i>
 					{{ mysession['username'] }} <i class="dropdown icon"></i>

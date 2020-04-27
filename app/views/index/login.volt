@@ -4,7 +4,7 @@
             Selamat datang di Laundry Service Organizer
         </h1>
         <p class="ui medium-text">Kami siap memudahkan urusan anda</p>
-        <img src="https://media.istockphoto.com/vectors/laundry-and-dry-cleaning-clothes-service-steps-illustration-vector-vector-id1160418064"
+        <img src="https://cdn4.vectorstock.com/i/1000x1000/77/48/laundry-room-with-washing-machine-and-clothes-vector-16497748.jpg"
             alt="" class="ui centered big image">
     </div>
     <div class="five wide column">

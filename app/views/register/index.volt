@@ -1,5 +1,5 @@
 <div class="ui column two grid stackable equal width container">
-    <div class="seven wide column">
+    <div class="six wide column">
         <div class="ui attached message">
             <div class="header">
                 <h2>Belum punya akun? Daftar sekarang</h2>
@@ -46,7 +46,12 @@
             Sudah punya akun? <a href="#">Masuk disini</a>
         </div>
     </div>
-    <div class="column">
-        <h1>AHAHA</h1>
+    <div class="column center aligned">
+        <h1 class="ui header">
+            Selamat datang di Laundry Service Organizer
+        </h1>
+        <p class="ui medium-text">Kami siap memudahkan urusan anda</p>
+        <img src="https://previews.123rf.com/images/yupiramos/yupiramos1708/yupiramos170807798/83677680-laundry-room-with-washing-machine-and-clothes-vector-illustration-graphic-design.jpg"
+            alt="" class="ui centered big image">
     </div>
 </div>

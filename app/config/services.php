@@ -49,6 +49,7 @@ $di->setShared('view', function () {
             ]);
             $voltCompiler = $volt->getCompiler();
             $voltCompiler->addFunction('strtotime', 'strtotime');
+            $voltCompiler->addFunction('number_format', 'number_format');
 
             return $volt;
         },

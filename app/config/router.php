@@ -18,4 +18,20 @@ $router->add(
     ]
 );
 
+$router->add(
+    '/delivery',
+    [
+        'controller' => 'pickupdelivery',
+        'action' => 'delivery',
+    ]
+);
+
+$router->add(
+    '/delivery/new',
+    [
+        'controller' => 'pickupdelivery',
+        'action' => 'newDelivery',
+    ]
+);
+
 $router->handle($_SERVER['REQUEST_URI']);

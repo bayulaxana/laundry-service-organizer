@@ -64,7 +64,9 @@ class SecurityHandler extends Injectable
             'order' => ['index', 'detail', 'new'],
             'myitem' => ['index', 'new', 'edit', 'update', 'delete'],
             'account' => ['index', 'edit'],
-            'api' => ['index', 'getitem'],
+            'api' => ['index', 'getitem', 'getservice', 'getitemlist'],
+            'comment' => ['new'],
+            'pickupdelivery' => ['delivery', 'newDelivery'],
         ];
         foreach ($privateResources as $resource => $actions) {
             $acl->addComponent(new Component($resource), $actions);

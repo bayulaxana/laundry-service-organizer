@@ -20,10 +20,12 @@ class RegisterForm extends Form
             'name' => [
                 'label' => 'Nama',
                 'fieldName' => 'name',
+                'message' => 'Anda harus mengisikan Nama'
             ],
             'username' => [
                 'label' => 'Username',
                 'fieldName' => 'username',
+                'message' => 'Anda harus mengisikan Username'
             ],
         ];
 
@@ -34,7 +36,7 @@ class RegisterForm extends Form
             $input->setFilters(['striptags', 'string']);
             $input->setAttribute('id', 'register-' . $field);
             $input->addValidators([
-                new PresenceOf(['message' => $field . 'is required'])
+                new PresenceOf(['message' => $value['message']])
             ]);
 
             $this->add($input);
@@ -47,7 +49,7 @@ class RegisterForm extends Form
         $address->setFilters(['striptags', 'string']);
         $address->setAttribute('id', 'register-' . $address->getName());
         $address->addValidators([
-            new PresenceOf(['message' =>  'address is required'])
+            new PresenceOf(['message' =>  'Anda harus mengisikan alamat'])
         ]);
 
         // Email
@@ -56,8 +58,8 @@ class RegisterForm extends Form
         $email->setLabel('Email');
         $email->setFilters('email');
         $email->addValidators([
-            new PresenceOf(['message' => 'email is required']),
-            new Email(['message' => 'Email is not valid']),
+            new PresenceOf(['message' => 'Anda harus mengisikan alamat email']),
+            new Email(['message' => 'Email yang anda masukkan tidak valid']),
         ]);
 
         // Phone
@@ -66,7 +68,7 @@ class RegisterForm extends Form
         $phone->setLabel('Nomor Telepon');
         $phone->setFilters('number');
         $phone->addValidators([
-            new PresenceOf(['message' => 'nomor telepon is required'])
+            new PresenceOf(['message' => 'Anda harus mengiskan nomor telepon'])
         ]);
 
         // Select input fields
@@ -88,7 +90,7 @@ class RegisterForm extends Form
         
         $passwod->setLabel('Password');
         $passwod->addValidators([
-            new PresenceOf(['message' => 'password is required'])
+            new PresenceOf(['message' => 'Anda harus mengisikan password'])
         ]);
         
         // Add everything to the Form

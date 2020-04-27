@@ -20,7 +20,7 @@ class LoginForm extends Form
         $username->setLabel('Username');
         $username->setFilters(['string', 'striptags']);
         $username->addValidators([
-            new PresenceOf(['message' => 'Username is required'])
+            new PresenceOf(['message' => 'Anda harus mengisikan username'])
         ]);
 
         // Password
@@ -28,7 +28,7 @@ class LoginForm extends Form
         
         $password->setLabel('Password');
         $password->addValidators([
-            new PresenceOf(['message' => 'Password is required'])
+            new PresenceOf(['message' => 'Anda harus mengisikan password'])
         ]);
 
         $this->add($username);

@@ -90,7 +90,7 @@ function executeStepTwo()
 {
     $('#loader').css({
         'display': 'block'
-    });   
+    });
     
     let stepBarTwo = document.getElementById('stepbar-two');
     let stepBarThree = document.getElementById('stepbar-three');
@@ -100,6 +100,16 @@ function executeStepTwo()
     let selectItems = document.getElementById('item-select-options');
     let itemToList  = document.getElementById('item-selected-list');
     let arr = getSelectedValue(selectItems);
+
+    $.ajax({
+        url: '/api/getservice/' + selectService.value,
+        complete: function() {
+            $('#cost-loader').hide();
+        },
+        success: function(result) {
+            $('#cost-row').html("Rp" + result.service_price + " " + result.service_unit_scheme);
+        }
+    });
     
     document.getElementById('detail-service').innerHTML = selectService.options[selectService.selectedIndex].text;
     for (let i=0; i<arr.length; i++) {

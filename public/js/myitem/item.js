@@ -1,5 +1,11 @@
 $("#edit-modal-form").modal('attach events', '#edit-modal-close', 'close');
 $("#delete-modal-form").modal('attach events', '#delete-modal-close', 'close');
+$(".placeholder-show").hide();
+
+setTimeout(function() {
+    $('.placeholder').hide();
+    $(".placeholder-show").show();
+}, 1000);
 
 $("#modal-submit").click(function() {
     $(this).addClass('loading');

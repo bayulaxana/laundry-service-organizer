@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use LaundryApp\Forms\ItemForm;
 use Phalcon\Db\Enum;
+use Phalcon\Filter;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Paginator\Adapter\NativeArray as ArrayPaginator;
 
@@ -28,18 +29,34 @@ class MyItemController extends ControllerBase
     public function indexAction()
     {
         $form = new ItemForm(null, ['edit' => true]);
-
-        // Start pagination
+        $searchQuery = $this->request->getQuery('search', Filter::FILTER_STRIPTAGS);
         $currentPage = $this->request->getQuery('page', 'int', 1);
+
+        if ($searchQuery) {
+            $condition = 'user_id = :user_id: AND item_details LIKE :item_details:';
+            $bindParam = [
+                'user_id' => $this->session->auth['id'],
+                'item_details' => '%' . $searchQuery . '%',
+            ];
+            $pageUrl = '/myitem?search=' . $searchQuery . "&page=";
+        }
+        else {
+            $condition = 'user_id = :user_id:';
+            $bindParam = [
+                'user_id' => $this->session->auth['id'],
+            ];
+            $pageUrl = '/myitem?page=';
+        }
+
+        // Find item
         $myItem = Item::find(
             [
-                'conditions' => 'user_id = :user_id:',
-                'bind' => [
-                    'user_id' => $this->session->auth['id'],
-                ]
+                'conditions' => $condition,
+                'bind' => $bindParam,
             ]
         )->toArray();
 
+        // Start pagination
         $paginator = new ArrayPaginator(
             [
                 'data' => $myItem,
@@ -51,6 +68,7 @@ class MyItemController extends ControllerBase
         
         // Send everything to the view
         $this->assets->addJs('js/myitem/item.js');
+        $this->view->setVar('pageUrl', $pageUrl);
         $this->view->setVar('page', $page);
         $this->view->form = $form;
     }

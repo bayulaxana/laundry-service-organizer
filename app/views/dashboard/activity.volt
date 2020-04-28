@@ -23,9 +23,7 @@
             </div>
         </div>
 
-        <div class="ui image fluid">
-            {{ image('img/activity-bg.jpg') }}
-        </div>
+        
 
         <div class="ui center aligned inverted green segment">
             <div class="ui large inverted statistic">
@@ -34,6 +32,19 @@
                 </div>
                 <div class="label">
                     Total Pesanan
+                </div>
+            </div>
+        </div>
+
+        <div class="ui stackable two cards">
+            <div class="card">
+                <div class="content">
+                    <canvas id="myChart" width="4" height="3"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    
                 </div>
             </div>
         </div>
@@ -87,3 +98,9 @@
         </div>
     </div>
 </div>
+
+<script>
+var activeOrder = {{ orderDetail['activeOrder'] }};
+var waitingOrder = {{ orderDetail['waitingOrder'] }};
+var finishedOrder = {{ orderDetail['finishedOrder'] }};
+</script>

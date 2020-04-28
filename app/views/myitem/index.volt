@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="ui attached segment">
+    <div class="ui attached segment" id="item-list-segment">
         {{ flashSession.output() }}
         <div class="ui pagination menu small blue">
             {{ link_to( pageUrl ~ page.previous, "Sebelum", "class": "item" ) }}
@@ -28,13 +28,27 @@
         {% for row in page.items %}
             <div class="card">
                 <div class="ui image">
-                    {{ image( row['item_image']) }}
+                    <div class="ui placeholder">
+                        <div class="square image"></div>
+                    </div>
+                    <img src="{{ row['item_image'] }}" class="placeholder-show"/>
                 </div>
                 <div class="content">
-                    <div class="header">{{ row['item_details'] }}</div>
-                    <div class="meta">{{ row['item_type'] }}</div>
+                    <div class="ui placeholder">
+                        <div class="header">
+                            <div class="very short line"></div>
+                            <div class="medium line"></div>
+                        </div>
+                        <div class="paragraph">
+                            <div class="short line"></div>
+                        </div>
+                    </div>
+                    <div class="placeholder-show">
+                        <div class="header">{{ row['item_details'] }}</div>
+                        <div class="meta">{{ row['item_type'] }}</div>
+                    </div>
                 </div>
-                <div class="extra content">
+                <div class="extra content placeholder-show">
                     <button class="ui button small black" onclick="getItemContent({{ row['item_id'] }})">Edit</button>
                     <button class="ui button small red" onclick="getDelete({{ row['item_id'] }})">Hapus</button>
                 </div>

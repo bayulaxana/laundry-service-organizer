@@ -60,6 +60,10 @@ class DashboardController extends ControllerBase
             'finishedOrder' => $finishedOrder,
             'waitingOrder' => $waitingOrder,
         ]);
+
+        // Add chart js to view
+        $this->assets->addJs('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js', false);
+        $this->assets->addJs('js/dashboard/dashboard.js');
     }
 
     public function latestAction()

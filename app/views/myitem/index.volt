@@ -3,16 +3,27 @@
 </div>
 
 <div class="ui container">
-    <div class="ui top attached compact menu inside pointing inverted">
+    <div class="ui top attached compact menu stackable inside pointing inverted small blue">
         <div class="ui item header">Daftar Item</div>
         <div class="right menu">
+            <div class="item">
+                <form method="GET" class="ui icon input">
+                    <input type="text" name="search" placeholder="Cari item...">
+                    <i class="icon search"></i>
+                </form>
+            </div>
             <div class="item hoverable">
-                {{ link_to('/myitem/new', '<i class="icon add"></i>Tambah Item Baru', 'class': 'ui green compact icon button') }}
+                {{ link_to('/myitem/new', '<i class="icon add"></i>Tambah Item Baru', 'class': 'ui black compact icon button') }}
             </div>
         </div>
     </div>
     <div class="ui attached segment">
         {{ flashSession.output() }}
+        <div class="ui pagination menu small blue">
+            {{ link_to( pageUrl ~ page.previous, "Sebelum", "class": "item" ) }}
+            {{ link_to( pageUrl ~ page.next, "Selanjutnya", "class": "item" ) }}
+        </div>
+        <div class="ui divider hidden"></div>
         <div class="ui five cards stackable">
         {% for row in page.items %}
             <div class="card">

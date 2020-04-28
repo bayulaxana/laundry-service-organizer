@@ -1,6 +1,7 @@
 <div class="ui container">
-    <div class="ui attached segment">
-        
+    <div class="ui divider hidden"></div>
+    <div class="ui attached message">
+        <h2>Tambah Item Baru</h2>
     </div>
     <div class="ui attached segment">
         {{ flash.output() }}
@@ -15,6 +16,8 @@
             </div>
             <div class="field">
                 {{ form.label('item_image') }}
+                Unggah foto dari item anda. Jika tidak unggah foto, maka akan ditampilkan foto default
+                <div class="ui divider"></div>
                 {{ form.render('item_image') }}
             </div>
             <input type="submit" value="Simpan" class="ui button blue"/>

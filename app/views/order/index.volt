@@ -4,7 +4,7 @@
 
 <!-- LIST -->
 <div class="ui container">
-    <div class="ui top attached compact menu inside pointing inverted">
+    <div class="ui top attached compact menu inside pointing inverted blue">
         <div class="ui item header">Riwayat Pesanan</div>
         <div class="right menu">
             <div class="item hoverable">

@@ -3,9 +3,10 @@
 </div>
 
 <div action="" class="ui grid container stackable">
+    
     <div class="ten wide column">
         <div class="ui message top attached">
-            
+            Ikuti langkah-langkah berikut untuk membuat pesanan baru
         </div>
         <div class="segment ui attached">
 
@@ -18,7 +19,7 @@
             </div>
             <!-- LOADER // -->
 
-            {{ link_to(url('order'), "Batalkan", "class": "ui button small red") }}
+            {{ link_to(url('order'), "<i class='cancel icon'></i>Batalkan", "class": "ui button compact red") }}
 
             <!-- STEP BAR -->
             <div class="ui ordered three steps" style="width: 100%;">

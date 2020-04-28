@@ -23,13 +23,14 @@
     {{ assets.outputCss() }}
 </head>
 
-<body>
+<body class="">
 
     {{ content() }}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script>
+        // Common js script for all views //
         $(document).ready(function () {
             $(".ui.toggle.button").click(function () {
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);

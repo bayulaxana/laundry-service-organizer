@@ -65,7 +65,7 @@ class SecurityHandler extends Injectable
             'myitem' => ['index', 'new', 'edit', 'update', 'delete'],
             'account' => ['index', 'edit'],
             'api' => ['index', 'getitem', 'getservice', 'getitemlist'],
-            'comment' => ['new'],
+            'comment' => ['new', 'delete'],
             'pickupdelivery' => ['delivery', 'newDelivery'],
         ];
         foreach ($privateResources as $resource => $actions) {

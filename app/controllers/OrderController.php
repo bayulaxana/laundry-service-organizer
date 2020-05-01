@@ -102,6 +102,16 @@ class OrderController extends ControllerBase
         }
         else {
             $commentForm = new CommentForm();
+
+            // Fetch user information
+            $user = Users::find(
+                [
+                    'conditions' => 'user_id = :user_id:',
+                    'bind' => [
+                        'user_id' => $this->session->auth['id'],
+                    ]        
+                ]
+            )->toArray();
             
             // Fetch the order detail
             $sql = "SELECT ord.*, srv.service_code, srv.service_name, srv.service_price, srv.service_unit_scheme
@@ -145,6 +155,7 @@ class OrderController extends ControllerBase
 
             // Sends everything to view
             $this->assets->addJs('js/order/detail.js');
+            $this->view->setVar('user', $user[0]);
             $this->view->setVar('order', $order[0]);
             $this->view->setVar('comments', $comments);
             $this->view->commentForm = $commentForm;

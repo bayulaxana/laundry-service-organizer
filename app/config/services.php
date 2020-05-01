@@ -105,7 +105,7 @@ $di->set('flash', function () {
 $di->setShared('session', function () {
     $session = new SessionManager();
     $files = new SessionAdapter([
-        'savePath' => sys_get_temp_dir(),
+        'savePath' => BASE_PATH . '/temp',
     ]);
     $session->setAdapter($files);
     $session->start();

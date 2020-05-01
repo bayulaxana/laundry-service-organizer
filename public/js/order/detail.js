@@ -18,4 +18,17 @@ $(document).ready(function() {
             }
         }
     });
+
+    $('.comment-delete-trigger').click(function() {
+        let commentId = $(this).attr('data-comment');
+        
+        // Delete the comment using AJAX
+        $.ajax({
+            url: '/comment/delete/' + commentId,
+            success: function(result) {
+                let html = "<div class='ui message green'>Komentar berhasil dihapus</div>"
+                $('#comment-for-' + commentId).html(html);
+            }
+        });
+    });
 });

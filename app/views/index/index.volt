@@ -6,26 +6,17 @@
       <li class="carousel-bullet"></li>
       <li class="carousel-bullet"></li>
       <li class="carousel-bullet"></li>
-      <li class="carousel-bullet"></li>
-      <li class="carousel-bullet"></li>
     </ul>
     <ul class="carousel-container">
       <li class="carousel-item">
-        <div class="item-1">
-
+        <div class="item-1" style="background-image: url( 'img/bg-carousel.jpg' );">
         </div>
       </li>
       <li class="carousel-item">
-        <div class="item-2"></div>
+        <div class="item-2" style="background-image: url( 'img/bg-carousel.jpg' );"></div>
       </li>
       <li class="carousel-item">
-        <div class="item-3"></div>
-      </li>
-      <li class="carousel-item">
-        <div class="item-4"></div>
-      </li>
-      <li class="carousel-item">
-        <div class="item-5"></div>
+        <div class="item-3" style="background-image: url( 'img/bg-carousel.jpg' );"></div>
       </li>
     </ul>
   </div>
@@ -51,10 +42,7 @@
             src="https://image.freepik.com/free-vector/laundry-cleaning-illustration-with-washing-machine_24908-59523.jpg" />
           <h1 class="ui header">Cuci Kering</h1>
           <p>
-            Donec sed odio dui. Etiam porta sem malesuada magna mollis
-            euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-            Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            Praesent commodo cursus magna.
+            Pencucian menggunakan mesin cuci higienis hingga kering.
           </p>
           <!-- <div class="ui green button">Jadwalkan Penjemputan &raquo;</div> -->
         </div>
@@ -63,10 +51,7 @@
             src="https://image.freepik.com/free-vector/laundry-cleaning-illustration-with-washing-machine_24908-59523.jpg" />
           <h1 class="ui header">Cuci Setrika</h1>
           <p>
-            Donec sed odio dui. Etiam porta sem malesuada magna mollis
-            euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-            Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            Praesent commodo cursus magna.
+            Pencucian menggunakan mesin cuci, kemudian disetrika dengan rapi.
           </p>
           <!-- <div class="ui green button">Jadwalkan Penjemputan &raquo;</div> -->
         </div>
@@ -75,10 +60,7 @@
             src="https://image.freepik.com/free-vector/laundry-cleaning-illustration-with-washing-machine_24908-59523.jpg" />
           <h1 class="ui header">Cuci Sepatu</h1>
           <p>
-            Donec sed odio dui. Etiam porta sem malesuada magna mollis
-            euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-            Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            Praesent commodo cursus magna.
+            Ingin mencuci sepatu, tapi malas. Kami juga menyediakan jasa pencucian sepatu.
           </p>
           <!-- <div class="ui green button">Jadwalkan Penjemputan &raquo;</div> -->
         </div>
@@ -103,21 +85,21 @@
       <div class="ui segment attached">
         <div class="ui fluid vertical steps">
           <div class="step">
-            <i class="dolly icon"></i>
-            <div class="content">
-              <div class="title">
-                <h3>Penjemputan</h3>
-              </div>
-              <div class="description">Jadwalkan penjemputan terhadap barang anda</div>
-            </div>
-          </div>
-          <div class="step">
             <i class="shopping basket icon"></i>
             <div class="content">
               <div class="title">
                 <h3>Pesan Layanan</h3>
               </div>
               <div class="description">Pilih layanan yang ingin anda gunakan</div>
+            </div>
+          </div>
+          <div class="step">
+            <i class="dolly icon"></i>
+            <div class="content">
+              <div class="title">
+                <h3>Penjemputan</h3>
+              </div>
+              <div class="description">Ajukan penjemputan terhadap barang anda jika ingin</div>
             </div>
           </div>
           <div class="step">
@@ -144,7 +126,7 @@
               <div class="title">
                 <h3>Pengiriman</h3>
               </div>
-              <div class="description">Setelah pesanan anda selesai, kami akan mengirimkannya ke anda</div>
+              <div class="description">Setelah pesanan anda selesai, anda dapat mengajukan pengiriman barang anda</div>
             </div>
           </div>
         </div>

@@ -3,11 +3,6 @@
         'icon': 'tasks',
         'name': 'Aktivitas Pesanan',
         'uri': '/dashboard/activity'
-    ],
-    'latest': [
-        'icon': 'clipboard check',
-        'name': 'Riwayat Pesanan Terkini',
-        'uri': '/dashboard/latest'
     ]
 ] %}
 
@@ -33,7 +28,7 @@
 <!-- SECTION TITLE // -->
 
 <!-- Attached Menu -->
-<div class="ui top attached compact menu inside pointing inverted">
+<div class="ui top attached compact menu inside pointing inverted blue">
     {% for action, menu in menuOptions %}
         <a href="{{ menu['uri'] }}" class="item {% if action == dispatcher.getActionName()|lower %}active{% endif %}">
             <i class="icon {{ menu['icon'] }}"></i>

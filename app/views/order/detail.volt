@@ -85,15 +85,20 @@
             <div class="ui segment attached">
                 <div class="ui comments">
                     {% for comment in comments %}
-                    <div class="comment">
+                    <div class="comment" id="comment-for-{{ comment['comment_id'] }}" data-comment="{{ comment['comment_id'] }}">
+                        <div class="avatar">
+                            {{ image(user['profile_img']) }}
+                        </div>
                         <div class="content">
-                            <a class="author">Saya</a>
+                            <a class="author">{{ user['name'] }}</a>
                             <div class="metadata">
-                                <span
-                                    class="date">{{ date('D, d M Y - H:i', strtotime(comment['comment_date'])) }}</span>
+                                <span class="date">{{ date('D, d M Y - H:i', strtotime(comment['comment_date'])) }}</span>
                             </div>
                             <div class="text">
                                 {{ comment['comment_content'] }}
+                            </div>
+                            <div class="actions">
+                                <a href="#" class="comment-delete-trigger" data-comment="{{ comment['comment_id'] }}">Hapus</a>
                             </div>
                         </div>
                     </div>
@@ -103,7 +108,7 @@
                             <input type="hidden" name="order_id" value="{{ order['order_id'] }}">
                         </div>
                         <div class="field">
-                            {{ commentForm.render('comment_content') }}
+                            {{ commentForm.render('comment_content', ['rows': '2']) }}
                         </div>
                         {{ commentForm.render('Kirim', ['class': 'ui button']) }}
                     </form>

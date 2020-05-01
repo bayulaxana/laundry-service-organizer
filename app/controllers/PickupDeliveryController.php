@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Phalcon\Filter;
 use Phalcon\Mvc\Dispatcher;
 
 class PickupDeliveryController extends ControllerBase
@@ -26,8 +27,10 @@ class PickupDeliveryController extends ControllerBase
     public function newDeliveryAction()
     {       
         if ($this->request->hasQuery('ordnum')) {
-            $order_id = $this->request->getQuery('ordnum');
+            $order_id = $this->request->getQuery('ordnum', Filter::FILTER_STRIPTAGS);
             
+            // Request validation
+            // number
             if (is_numeric($order_id) == false || $order_id == null) {
                 $this->response->redirect('/order');
                 $this->flashSession->error(
@@ -36,7 +39,25 @@ class PickupDeliveryController extends ControllerBase
 
                 return;
             }
+             
+            // Right user
+            $orderKu = Orders::findFirst(
+                [
+                    'conditions' => 'order_id = :order_id:',
+                    'bind' => [ 'order_id' => $order_id ],
+                ]
+            )->toArray();
+
+            if ($orderKu['user_id'] != $this->session->auth['id']) {
+                $this->response->redirect('/order');
+                $this->flashSession->error(
+                    parent::getFormattedFlashOutputStatic('Terjadi Kesalahan', ['Permintaan anda tidak dapat diproses'])
+                );
+
+                return;
+            }
             
+            // Request OK, continue to create
             $delivery = new PickupDelivery();
             
             $delivery->user_id      = $this->session->auth['id'];

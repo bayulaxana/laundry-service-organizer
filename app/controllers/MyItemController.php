@@ -141,6 +141,10 @@ class MyItemController extends ControllerBase
 
     public function updateAction()
     {
+        if ($this->request->isPost() == false) {
+            $this->response->redirect('/myitem');
+        }
+        
         $form = new ItemForm(null, ['edit' => true]);
         // Update
         if ($this->request->isPost()) {
@@ -173,11 +177,42 @@ class MyItemController extends ControllerBase
 
             $item = new Item();
             
-            $item->item_id      = $data['item_id'];
-            $item->user_id      = $this->session->auth['id'];
+            $item->item_id      = (int) $data['item_id'];
+            $item->user_id      = (int) $this->session->auth['id'];
             $item->item_details = $data['item_details'];
             $item->item_type    = $data['item_type'];
-            $item->item_image   = $item_image;
+            $item->item_image   = $item_image['item_image'];
+
+            // Photo
+            if ($this->request->hasFiles() == true) {
+
+                foreach($this->request->getUploadedFiles() as $file) {
+                    $fileNametoDB = 
+                        "img/item/item-id-" . 
+                        $item->item_id . "-" .
+                        date_create('now')->format('Y-m-d His') . "." . $file->getExtension();
+                    
+                    $savePath = BASE_PATH . '/public/' . $fileNametoDB;
+                    $file->moveTo($savePath);
+                    
+                    if ($item->item_image != 'img/default.png') {
+                        $unlinkStatus = unlink(BASE_PATH . '/public/' . $item->item_image);
+                    }
+                    else {
+                        $unlinkStatus = true;
+                    }
+
+                    if ($unlinkStatus == false) {
+                        $this->response->redirect('/myitem');
+                        $this->flashSession->error(
+                            parent::getFormattedFlashOutputStatic('Terjadi Kesalahan', ['Terjadi kesalahan saat memperbarui'])
+                        );
+                    }
+                    else {
+                        $item->item_image = $fileNametoDB;
+                    }
+                }
+            }
 
             $item->update();
             $form->clear();

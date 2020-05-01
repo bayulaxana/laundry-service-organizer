@@ -8,6 +8,8 @@ var totalItems = container.querySelectorAll('.carousel-item').length;
 var percent = (100 / totalItems);
 var currentIndex = 0;
 
+console.log(percent);
+
 function next() {
     slideTo(currentIndex + 1);
 }

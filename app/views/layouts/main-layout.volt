@@ -8,7 +8,6 @@
                 <i class="chart line icon"></i> Dashboard <i class="dropdown icon"></i>
                 <div class="menu">
                     {{ link_to("/dashboard/activity", "Aktivitas Pesanan", "class": "item") }}
-                    {{ link_to("/dashboard/latest", "Riwayat Pesanan Terkini", "class": "item") }}
                 </div>
                 </div>
                 {{ link_to("/order", "<i class='icon shopping bag'></i>Pesanan", "class": "item") }}

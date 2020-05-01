@@ -55,4 +55,35 @@ class CommentController extends ControllerBase
             $this->response->redirect('/order/detail/' . $data['order_id']);
         }
     }
+
+    public function deleteAction($commentId = null)
+    {
+        $this->view->disable();
+
+        if ($this->request->isAjax() == false || !$commentId) {
+            $this->response->redirect('/order');
+            return;
+        }
+
+        if ($this->request->isAjax()) {
+            $comment = Comment::findFirst(
+                [
+                    'conditions' => 'comment_id = :comment_id:',
+                    'bind' => [
+                        'comment_id' => $commentId,
+                    ]
+                ]
+            );
+
+            if ($comment && $comment->user_id == $this->session->auth['id']) {
+                $comment->delete();
+
+                $this->response->setContentType('application/json', 'UTF-8');
+                $this->response->setJsonContent([
+                    'success' => 'Komentar berhasil dihapus'
+                ]);
+                $this->response->send();
+            }
+        }
+    }
 }

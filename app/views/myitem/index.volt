@@ -59,7 +59,7 @@
         <div class="ui modal tiny test" id="edit-modal-form">
             <div class="ui header large">Edit Item</div>
             <div class="scrolling content">
-                <form class="ui loading form" method="post" id="modal-form" action="/myitem/update">
+                <form class="ui loading form" method="post" id="modal-form" action="/myitem/update" enctype="multipart/form-data">
                     <div class="field">
                         {{ form.render('item_id') }}
                     </div>
@@ -70,6 +70,10 @@
                     <div class="field">
                         {{ form.label('item_type') }}
                         {{ form.render('item_type') }}
+                    </div>
+                    <div class="field">
+                        {{ form.label('item_image') }}
+                        {{ form.render('item_image') }}
                     </div>
                     <button class="ui button green" id="modal-submit" type="submit">Edit</button>
                     <div class="ui button black" id="edit-modal-close">Batal</div>

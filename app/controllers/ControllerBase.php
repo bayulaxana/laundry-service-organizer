@@ -46,12 +46,14 @@ class ControllerBase extends Controller
         }
     }
 
-    public static function getFormattedFlashOutputStatic(string $header, array $messageList)
+    public static function getFormattedFlashOutput(
+        string $header, array $messageList,
+        string $status = 'success');
     {
         $headerStr =    '<i class="close icon"></i>
                         <div class="header">' . $header . '</div>';
         if (count($messageList) == 1) {
-            return $headerStr . '<p>' . $messageList[0] . '</p>';
+            $list = '<p>' . $messageList[0] '</p>'
         }
         else {
             $list = '<ul class="list">';
@@ -59,8 +61,23 @@ class ControllerBase extends Controller
                 $list .= '<li>' . $msg . '</li>';
             }
             $list .= '</ul>';
-            
-            return $headerStr . $list;
         }
+
+        switch ($status) {
+            case 'succes':
+                $result = '<div class="ui message inverted green small">' . $headerStr . $list .  '</div>';
+                break;
+            case 'info':
+                $result = '<div class="ui message inverted blue small">' . $headerStr . $list .  '</div>';
+                break;
+            case 'danger':
+                $result = '<div class="ui message inverted red small">' . $headerStr . $list .  '</div>';
+                break;
+            case 'warning':
+                $result = '<div class="ui message inverted yellow small">' . $headerStr . $list .  '</div>';
+                break;
+        }
+
+        return $result;
     }
 }

@@ -1,7 +1,3 @@
-# Laundry Service Organizer
-
-Final Project PBKK Individu
-
 ## Daftar Use Case
 
 Berikut adalah daftar use case yang diterapkan pada web.
